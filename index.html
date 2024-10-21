@@ -3,42 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Gabriele Dauksaite: Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
-        <h1>My Portfolio</h1>
+        <h1>Gabriele Dauksaite: Portfolio</h1>
     </header>
 
-    <section class="projects">
-        <!-- Project Tile 1 -->
-        <div class="project-tile">
-            <img src="images/project1.jpg" alt="Project 1">
-            <div class="project-info">
-                <h3>Project Name: Project 1</h3>
-                <p>Location: City</p>
-                <p>Year: 2024</p>
-                <p>About: A brief description</p>
-            </div>
-        </div>
-
-        <!-- Project Tile 2 -->
-        <div class="project-tile">
-            <img src="images/project2.jpg" alt="Project 2">
-            <div class="project-info">
-                <h3>Project Name: Project 2</h3>
-                <p>Location: Another City</p>
-                <p>Year: 2023</p>
-                <p>About: A different brief description</p>
-            </div>
-        </div>
-
-        <!-- Add more project tiles as needed -->
-    </section>
+    <div class="main-content"> <!-- Wrapper for the main content -->
+        <section class="projects">
+            <div class="project-container"> <!-- New Container for Projects -->
+                <!-- Project Tile 1 -->
+                <div class="project-tile">
+                    <div class="project-info">
+                        <img src="https://via.placeholder.com/30x30.png?text=Logo+1" alt="Logo 1" class="project-logo"> <!-- Placeholder Logo 1 -->
+                        <h3>The Red House</h3>
+                        <p>UNITED KINGDOM, NEWCASTLE UPON TYNE</p>
+                        <p>2024</p>
+                        <p>A cutting-edge sustainable community design.</p>
+                    </div>
+                    <img src="images/project1.jpg" alt="Project 1">
+                </div>
+                
+                <!-- Project Tile 2 -->
+                <div class="project-tile">
+                    <div class="project-info">
+                        <img src="https://via.placeholder.com/30x30.png?text=Logo+2" alt="Logo 2" class="project-logo"> <!-- Placeholder Logo 2 -->
+                        <h3>Beige Interior</h3>
+                        <p>LITHUANIA, PALANGA</p>
+                        <p>2024</p>
+                        <p>An innovative mixed-use development project.</p>
+                    </div>
+                    <img src="images/project2.jpg" alt="Project 2">
+                </div>
+                
+                <!-- Project Tile 3 -->
+                <div class="project-tile">
+                    <div class="project-info">
+                        <img src="https://via.placeholder.com/30x30.png?text=Logo+3" alt="Logo 3" class="project-logo"> <!-- Placeholder Logo 3 -->
+                        <h3>Handsome Men Architecture</h3>
+                        <p>FRANCE, PARIS</p>
+                        <p>2024</p>
+                        <p>A modern art gallery designed for immersive experiences.</p>
+                    </div>
+                    <img src="images/project3.jpg" alt="Project 3"> <!-- Ensure you have the image in your images folder -->
+                </div>
+            </div> <!-- End of Project Container -->
+        </section>        
+    </div>
 
     <footer>
-        <p>&copy; 2024 My Name</p>
+        <p>&copy; 2024 Gabriele Dauksaite <a href="https://www.linkedin.com/in/gabriele-dauksaite/" target="_blank"><i class="fab fa-linkedin"></i></a></p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const projectTiles = document.querySelectorAll('.project-tile');
+            const projectContainer = document.querySelector('.project-container'); // Reference to the container
+            let isScrolling;
+    
+            // Function to add visible class to project tiles when in viewport
+            const observerOptions = {
+                root: null, // Use the viewport as the container
+                threshold: 0.1 // Trigger when 10% of the tile is visible
+            };
+    
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible'); // Add the class to trigger animation
+                        observer.unobserve(entry.target); // Stop observing once it is visible
+                    }
+                });
+            }, observerOptions);
+    
+            projectTiles.forEach(tile => {
+                observer.observe(tile); // Start observing each tile
+            });
+    
+            // Zoom effect on scroll
+            window.addEventListener('scroll', function() {
+                // Zoom out for the entire container
+                projectContainer.style.transform = 'scale(0.85)'; // Increase zoom out effect
+    
+                // Clear the timeout if we're already scrolling
+                window.clearTimeout(isScrolling);
+    
+                // Set a timeout to run after scrolling ends
+                isScrolling = setTimeout(function() {
+                    projectContainer.style.transform = 'scale(1)'; // Zoom in when scrolling stops
+                }, 200); // Adjust the timeout as needed (200ms here for smoother effect)
+            });
+        });
+    </script>              
 </body>
 </html>

@@ -5,55 +5,155 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    padding: 1rem;
+html {
+    scroll-behavior: smooth; /* Enable smooth scrolling */
 }
 
+@font-face {
+    font-family: 'Swiss721 LT BT';
+    src: url('fonts/Swiss721LT-BT.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Swiss721 LT BT', sans-serif; /* Fallback to sans-serif */
+    line-height: 1.6;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to the start */
+    align-items: center;
+}
+
+/* Modern Header */
 header {
-    text-align: center;
-    padding: 2rem 0;
-    background-color: #f8f8f8;
+    display: none;
 }
 
 h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    font-size: 2rem; /* Larger font size for impact */
+    margin-bottom: 0.5rem; /* Less margin for tighter layout */
+    font-weight: 700; /* Bold font weight for emphasis */
+    font-family: 'Swiss721 LT BT', sans-serif;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column; /* Display projects vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    flex: 1; /* Allow this section to grow */
+    width: 100%; /* Full width */
+    padding: 0 20%; /* Add horizontal padding for whitespace */
 }
 
 .projects {
     display: flex;
     flex-direction: column; /* Display projects vertically */
-    gap: 2rem; /* Space between project tiles */
+    gap: 3rem; /* Increased space between project tiles */
     padding: 2rem 0;
+    justify-content: center; /* Center content */
+    align-items: center; /* Center content */
+    width: 100%; /* Full width */
+}
+
+.project-container {
+    transition: transform 0.85s ease-in-out; /* Transition for scaling */
 }
 
 .project-tile {
-    display: flex; /* Flexbox to place image and info side by side */
-    align-items: center; /* Vertically align items */
-    gap: 1.5rem; /* Space between image and info */
-    border: 1px solid #ddd; /* Optional: Border to separate projects */
-    padding: 1rem;
+    display: flex;
+    flex-direction: row-reverse; /* Image on the right, text on the left */
+    align-items: flex-start; /* Align the text to the top of the image */
+    max-width: 100%; /* Ensure the project tile doesn't exceed the screen width */
+    width: calc(100% - 20%); /* Adjust the width to account for project-info width */
+    height: auto;
+    gap: 2rem; /* Increased space between image and info */
+    position: relative;
+    transform: translateY(20px) scale(0.85); /* Initial position and scale */
+    margin-bottom: 2rem; /* Add margin to create gaps between project tiles */
+}
+
+.project-tile.visible {
+    opacity: 1; /* Fully visible */
+    transform: translateY(0) scale(1); /* Move to original position and scale to 1 */
 }
 
 .project-tile img {
-    width: 250px; /* Set a fixed width for the image */
-    height: auto;
-    display: block;
-    border-radius: 8px; /* Optional: Rounded corners for the image */
+    max-width: 70%; /* The image will take up to 70% of the project tile's width */
+    height: auto; /* Keeps the aspect ratio intact */
+    object-fit: contain; /* Ensure the image does not stretch out of proportion */
+    max-height: 80vh; /* Set a max height for the images relative to viewport height */
 }
 
 .project-info {
-    flex: 1; /* Make project info take the rest of the space */
+    flex: 1;
+    max-width: 30%; /* Limit the project info to take 30% of the width */
+    text-align: right; /* Right-align the text */
+    position: absolute; /* Position on top of the image */
+    top: 0; /* Start project info from the top-left of the image */
+    left: 0; /* Align with the left edge */
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.8); /* Optional: Semi-transparent background for readability */
+    z-index: 1; /* Ensures the info stays above the image */
 }
 
 .project-info h3, .project-info p {
-    margin-bottom: 0.5rem; /* Spacing between text elements */
+    margin-bottom: 1rem; /* Increased spacing between text elements */
+    font-family: 'Swiss721 LT BT', sans-serif;
 }
 
+.project-logo {
+    width: 40px; /* Increased width of the logo */
+    height: 40px; /* Increased height of the logo */
+    margin-bottom: 0.5rem; /* Space between the logo and project name */
+}
+
+.project-info h3, .project-info p {
+    margin-bottom: 1rem; /* Increased spacing between text elements */
+}
+
+/* Responsive font sizes */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.2rem; /* Smaller font size for mobile */
+    }
+    .project-info h3 {
+        font-size: 1rem; /* Adjust project name font size */
+    }
+    .project-info p {
+        font-size: 0.8rem; /* Adjust paragraph font size */
+    }
+}
+
+/* Modern Dark Footer */
 footer {
     text-align: center;
     padding: 1rem;
-    background-color: #f8f8f8;
+    background-color: #ffffff;
+    color: #f8f8f8; /* Light text color for contrast */
+    width: 100%; /* Full width */
+    position: relative; /* Position relative for better layout */
+    border-top: 0.3rem solid #333; /* Dark top border */
+}
+
+footer p {
+    font-size: 1.5rem; /* Increase text size */
+    color: #333; /* Set text color to dark */
+}
+
+footer a {
+    text-decoration: none; /* Remove underline from link */
+    color: #333; /* Light text color for links */
+    margin-left: 0.5rem; /* Space between text and icon */
+    font-size: 1.5rem; /* Adjust size of LinkedIn icon */
+}
+
+footer a:hover {
+    color: #1e90ff; /* Change link color on hover for effect */
+}
+
+footer a i {
+    font-size: 1.5rem; /* Make LinkedIn icon bigger (double size) */
 }
